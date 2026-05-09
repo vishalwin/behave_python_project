@@ -11,8 +11,8 @@ def step_impl(context):
 @when(u'user enter username and password')
 def step_impl(context):
     data= read_json()
-    username= data["username"]
-    password = data["password"]
+    username= data["valid_user"]["username"]
+    password = data["valid_user"]["password"]
     context.driver.find_element("id","user-name").send_keys(username)
     context.driver.find_element("id","password").send_keys(password)
     
@@ -29,5 +29,25 @@ def step_impl(context):
     except NoSuchElementException:
         # self healing code
             assert False ,"product pae is not visisble"
-  # adding exception handling mechanism in selenium web automation      
+  # adding exception handling mechanism in selenium web automation  
+  # self healing code    
 
+@when("user enter invalid username and password")
+def step_impl(context):
+    data= read_json()
+    username= data["invalid_user"]["username"]
+    password = data["invalid_user"]["password"]
+    context.driver.find_element("id","user-name").send_keys(username)
+    context.driver.find_element("id","password").send_keys(password)
+
+@then(u'login page shows error in login')
+def step_impl(context):
+    try:
+        error_locator=(By.XPATH,"//h3")
+        error_element=context.driver.find_element(*error_locator)
+        assert error_element.is_displayed(),"error is not displayed"
+    except NoSuchElementException:
+        # self healing code
+            assert False ,"credential is incorrect"
+  # adding exception handling mechanism in selenium web automation  
+  # self healing code    

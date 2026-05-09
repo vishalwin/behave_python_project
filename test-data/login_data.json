@@ -1,6 +1,11 @@
 {
-   
+   "valid_user":{
     "username": "performance_glitch_user",
     "password": "secret_sauce"
+   },
+   "invalid_user":{
+    "username": "wronguser",
+    "password": "wrongpassword"
+   }
    
 }
